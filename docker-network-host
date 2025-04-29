@@ -1,0 +1,47 @@
+[root@ip-172-31-23-24 docker-web-app]# #host network
+
+[root@ip-172-31-23-24 docker-web-app]# docker run -d --name httpd02 --net host httpd
+3c6d08167269a3eafad03050782256e140b7b3d62a9c8562cd8bb0c2daffdc48
+
+[root@ip-172-31-23-24 docker-web-app]# docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+3c6d08167269   httpd     "httpd-foreground"       5 seconds ago    Up 4 seconds                                                httpd02
+97227e865f6c   httpd     "httpd-foreground"       10 minutes ago   Up 10 minutes   0.0.0.0:8081->80/tcp, :::8081->80/tcp       httpd01
+68cefe7ca3b5   image1    "catalina.sh run"        38 minutes ago   Up 38 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   wizardly_shaw
+f5683f312da2   nginx     "/docker-entrypoint.…"   59 minutes ago   Up 59 minutes   80/tcp                                      optimistic_fermat
+
+[root@ip-172-31-23-24 docker-web-app]# docker network inspect host
+[
+    {
+        "Name": "host",
+        "Id": "f09ba16a3ecb876c2da7dcb52cc29a905ce4987aa0d5fde6e22b66ec43036301",
+        "Created": "2025-04-29T13:47:37.056023198Z",
+        "Scope": "local",
+        "Driver": "host",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": null
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "3c6d08167269a3eafad03050782256e140b7b3d62a9c8562cd8bb0c2daffdc48": {
+                "Name": "httpd02",
+                "EndpointID": "0229c97b83502967e77cfb072d1db4834131fb58d1ec22a8449f53614ca5ca40",
+                "MacAddress": "",
+                "IPv4Address": "",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+[root@ip-172-31-23-24 docker-web-app]#
