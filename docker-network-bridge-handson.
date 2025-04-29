@@ -1,0 +1,79 @@
+
+it will create the dontainer using bridge network
+
+
+[root@ip-172-31-23-24 docker-web-app]# docker run -d --name httpd01 -p 8081:80 httpd
+97227e865f6c40ec1800fec378a9f491cff367fcd62b7c7fd989992dd235be89
+
+[root@ip-172-31-23-24 docker-web-app]# docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED             STATUS                   PORTS                                                               NAMES
+97227e865f6c   httpd     "httpd-foreground"       7 seconds ago    Up 6 seconds    0.0.0.0:8081->80/tcp, :::8081->80/tcp       httpd01
+68cefe7ca3b5   image1    "catalina.sh run"        28 minutes ago   Up 28 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   wizardly_shaw
+f5683f312da2   nginx     "/docker-entrypoint.…"   49 minutes ago   Up 49 minutes   80/tcp                                      optimistic_fermat
+
+[root@ip-172-31-23-24 docker-web-app]# docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+b17f5fae59b1   bridge    bridge    local
+f09ba16a3ecb   host      host      local
+9bd94b793c76   none      null      local
+
+[root@ip-172-31-23-24 docker-web-app]# docker network inspect bridge
+[
+    {
+        "Name": "bridge",
+        "Id": "b17f5fae59b1921e774ce3541cb2e5c05d8f881821adeccd9f661bce2da0fb33",
+        "Created": "2025-04-29T13:47:37.148790363Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16",
+                    "Gateway": "172.17.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "68cefe7ca3b5c0c40759ce35ed708cc17fb7f68f1e81f1cea373d6eaf10738c8": {
+                "Name": "wizardly_shaw",
+                "EndpointID": "1e57d4501af4ed961f4a1c6dd531c3d6f4647906d1c6633f31ac88e65a45cfb7",
+                "MacAddress": "02:42:ac:11:00:03",
+                "IPv4Address": "172.17.0.3/16",
+                "IPv6Address": ""
+            },
+            "97227e865f6c40ec1800fec378a9f491cff367fcd62b7c7fd989992dd235be89": {
+                "Name": "httpd01",
+                "EndpointID": "5616131d195b96affbb4d6ec241039679ff155bb22e6f411aa2738e2788d6b8d",
+                "MacAddress": "02:42:ac:11:00:04",
+                "IPv4Address": "172.17.0.4/16",
+                "IPv6Address": ""
+            },
+            "f5683f312da2deb9fdc970b7dd4a9206a2e9ed9ffea5aaa8eb86d418e541c4b5": {
+                "Name": "optimistic_fermat",
+                "EndpointID": "6f983531f47412701240ec77e1932706e6bddd5e9b5b79eccbb5a5c52786709e",
+                "MacAddress": "02:42:ac:11:00:02",
+                "IPv4Address": "172.17.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
