@@ -1,0 +1,75 @@
+ DOCKER NETWORKING:
+
+
+Docker networks allow containers to communicate with each other, as well as with the host machine, and even external networks. 
+By using networks effectively, you can manage how containers connect and secure their interactions. 
+Docker provides multiple network drivers to suit different use cases.
+
+
+Types of Docker Networks:
+
+Bridge:
+
+Default network for containers.
+Containers within the same bridge network can communicate with each other.
+Useful for standalone containers.
+
+Host:
+
+Uses the host machine's network stack.
+No isolation; the container shares the host's IP and port space.
+Best for performance-sensitive applications.
+
+Overlay:
+
+Enables communication between containers on different hosts in a Docker Swarm.
+Great for scaling distributed applications.
+
+None:
+
+Completely disables networking for the container.
+Suitable for containers that do not require network access.
+
+Custom Networks:
+
+Created by the user for more granular control.
+Allows defining specific subnets, gateways, and more.
+
+
+Common Docker network Commands:
+1) List Docker Networks:
+
+
+docker network ls
+NETWORK ID     NAME              DRIVER    SCOPE
+d4e5f6g7h8i9   bridge            bridge    local    
+a1b2c3d4e5f6   host              host      local
+a1b2c3d4e5f6   none              null      local
+
+2) create docker network
+
+docker network create my_network
+
+3) inspect a network
+
+docker network inspect my_network
+
+4) remove or delete docker network
+
+docker network rm my_network
+
+5) remove all unused docker network
+
+docker network prune
+
+6) To connect a running docker container to an existing network
+
+docker network connect my_network my_nginx
+
+7) To remove container from the network
+
+docker network disconnect my_network my_nginx
+
+8) Create a custom network
+
+docker network create --driver bridge my_custom_network
