@@ -1,0 +1,49 @@
+[root@ip-172-31-23-24 docker-web-app]# #none network
+
+[root@ip-172-31-23-24 docker-web-app]# docker run -d --name httpdo3 --net none httpd
+861ee03a245ad3174ca49eb4177d247f01798a18090f5b3c0e0218daafc4cc0f
+
+[root@ip-172-31-23-24 docker-web-app]# docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED             STATUS             PORTS                                       NAMES
+861ee03a245a   httpd     "httpd-foreground"       12 seconds ago      Up 11 seconds                                                  httpdo3
+3c6d08167269   httpd     "httpd-foreground"       6 minutes ago       Up 6 minutes                                                   httpd02
+97227e865f6c   httpd     "httpd-foreground"       16 minutes ago      Up 16 minutes      0.0.0.0:8081->80/tcp, :::8081->80/tcp       httpd01
+68cefe7ca3b5   image1    "catalina.sh run"        44 minutes ago      Up 44 minutes      0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   wizardly_shaw
+f5683f312da2   nginx     "/docker-entrypoint.…"   About an hour ago   Up About an hour   80/tcp                                      optimistic_fermat
+
+[root@ip-172-31-23-24 docker-web-app]# docker network inspect none
+[
+    {
+        "Name": "none",
+        "Id": "9bd94b793c760e4d5002d75c75375c5f4dc4efc71f5049faea660bcfeda5e4ce",
+        "Created": "2025-04-29T13:47:37.030925925Z",
+        "Scope": "local",
+        "Driver": "null",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": null
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "861ee03a245ad3174ca49eb4177d247f01798a18090f5b3c0e0218daafc4cc0f": {
+                "Name": "httpdo3",
+                "EndpointID": "6b6549a761feba6d8f42cb1661d5ab75aa10e3ab34bb58b9b9b120ef1cd7a043",
+                "MacAddress": "",
+                "IPv4Address": "",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+[root@ip-172-31-23-24 docker-web-app]#
+
